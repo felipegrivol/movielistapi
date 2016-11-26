@@ -7,14 +7,13 @@ var Login = require('../models/Login.js');
 
 var router = express.Router();
 
-router.post("/auth", function(req, res, next) {
-    
-    Login.findOne({ user: req.body.user  }, function(err, user) {
+router.post("/login", function(req, res, next) {
+    var login = req.body;
+
+    Login.findOne({ user: login.user, password: login.password  }, function(err, user) {
         if (err) throw err;
 
         if (!user) {
-            res.json({ success: false, message: 'User or password invalid!' });
-        } else if (user.password != req.body.password) {
             res.json({ success: false, message: 'User or password invalid!' });
         } else {
             var token = jwt.sign(user, config.secret, { expiresIn: '1m' });

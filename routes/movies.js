@@ -12,7 +12,7 @@ router.use(function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-  Movie.find(function (err, movies) {
+  Movie.find({}).sort({releaseYear: 1}).exec(function (err, movies) {
     if (err) return next(err);
     res.json(movies);
   });
