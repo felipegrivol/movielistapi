@@ -55,7 +55,7 @@ app.use(function(err, req, res, next) {
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.database)
-  .then(() =>  console.log('connection succesful'))
+  .then(() =>  console.log('connection successful'))
   .catch((err) => console.error(err));
 
 module.exports = app;
